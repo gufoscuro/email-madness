@@ -110,10 +110,10 @@
 		{/if}
 	</div>
 	<div class="flex EditorViews">
-		<div class="w-3/5">
+		<div class="w-1/2 text-xs">
 			<CodeMirror bind:this={codemirrorInstance} on:change={onCodeEditorChange} />
 		</div>
-		<div class="Renderer w-2/5">
+		<div class="Renderer w-1/2">
 			<iframe class="w-full h-full" title="renderer" bind:this={iframeHandle}> </iframe>
 		</div>
 	</div>
