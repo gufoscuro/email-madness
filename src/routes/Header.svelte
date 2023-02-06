@@ -14,8 +14,8 @@
 	}
 </style>
 
-<div class="Header bg-white border-b border-solid border-gray-200 flex items-center h-16 px-4 fixed top-0 left-0 z-20 w-full">
-	<div class="font-semibold text-gray-700 text-lg">Lovely Emails</div>
+<div class="Header flex items-center h-16 px-4 fixed top-0 left-0 z-20 w-full">
+	<div class="font-semibold text-white text-lg">Lovely Emails</div>
 	<div class="h-full flex-grow flex items-center justify-end">
 		<div class="mr-4">
 			<a href="/layout" class="HeadLink" class:active={$page.url.pathname === '/layout'}>General Layout</a>

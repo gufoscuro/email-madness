@@ -19,6 +19,8 @@
 body {
 	min-height: 100vh;
 	margin: 0;
+	background-color: #263238;
+	color: #fff;
 }
 
 
@@ -28,15 +30,20 @@ button.button {
 	padding: .35rem 1.2rem;
 }
 button.primary-button {
-	@apply bg-gray-200;
+	@apply bg-gray-400;
 }
 button.primary-button:hover:not(:disabled) {
-	background-color: #3ddc91;
+	@apply bg-gray-500
 }
 
 button.secondary-button {
-	@apply bg-blue-200;
+	@apply bg-blue-400;
 }
 button.secondary-button:hover:not(:disabled) {
-	@apply bg-blue-300;
+	@apply bg-blue-500;
+}
+button.button:disabled {
+	@apply bg-gray-200;
+	@apply text-gray-400;
+	@apply cursor-not-allowed;
 }

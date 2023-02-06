@@ -5,15 +5,14 @@
 	export let layoutCode: string = '';
 	export let isLayoutEditor: boolean = false;
 	
-	$: console.log ('isLayoutEditor', isLayoutEditor)
-	$: console.log ('templateCode', templateCode.length)
-	$: console.log ('layoutCode', layoutCode.length)
-	
 	let iframeHandle: any,
 		timer: any,
 		codemirrorInstance: any,
 		editorCode: string = '',
-		iframeCode: string = '';
+		iframeCode: string = '',
+		editorCodeUntouched: string = '',
+		firstLoad: boolean = false,
+		saveBusy: boolean = false;
 
 	const onCodeEditorChange = (event: CustomEvent) => {
 		if (timer) {
@@ -24,6 +23,10 @@
 		timer = setTimeout(() => {
 			// console.log ('onChange', event.detail.value);
 			editorCode = event.detail.value;
+			if (firstLoad === false) {
+				firstLoad = true;
+				editorCodeUntouched = editorCode;
+			}
 		}, 500);
 	}
 
@@ -45,21 +48,37 @@
 		return layoutCode !== '' ? layoutCode.replace(/{{template}}/g, data) : data;
 	}
 
-	const onSave = () => {
+	const onSave = async () => {
+		saveBusy = true;
 		let formData = new FormData();
-		formData.append('data', iframeCode);
-		fetch('?/save', {
+		formData.append('data', editorCode);
+		await fetch('?/save', {
 			method: 'POST',
 			headers: {
 				// 'Accept': 'application/json',
 				// 'Content-Type': 'application/json'
 			},
 			body: formData
-		})
+		});
+		editorCodeUntouched = editorCode;
+		saveBusy = false;
+	}
+
+	const downloadFile = (data: string, filename: string) => {
+		const a = document.createElement ('a');
+		const blobUrl = URL.createObjectURL (new Blob([ data ], { type: 'text/plain' }));
+		document.body.appendChild (a);
+		a.href = blobUrl;
+		a.download = filename;
+		a.click ();
+		setTimeout (() => {
+			URL.revokeObjectURL (blobUrl);
+			document.body.removeChild (a);
+		}, 0)
 	}
 
 	const onExport = () => {
-		console.log ('onExport')
+		downloadFile(iframeCode, 'template.txt')
 	}
 
 	const getIframeContent = (data: string) => {
@@ -78,17 +97,30 @@
 	}
 
 	$: if (iframeHandle) updateIframe(getIframeContent(editorCode));
+	$: saveEnabled = editorCode !== editorCodeUntouched;
 </script>
 
-<div class="Editor flex h-full">
-	<div class="w-3/5">
-		<CodeMirror bind:this={codemirrorInstance} on:change={onCodeEditorChange} />
-	</div>
-	<div class="Renderer w-2/5">
-		<div class="flex items-center justify-end py-1 px-1 border-solid border-b border-gray-200">
+<div class="Editor h-full">
+	<div class="flex items-center justify-start px-1 h-12">
+		{#if saveEnabled}
+			<button class="button secondary-button" disabled={saveBusy} on:click={onSave}>Save Changes</button>
+		{/if}
+		{#if !isLayoutEditor}
 			<button class="button primary-button" on:click={onExport}>Export</button>
-			<button class="button secondary-button" on:click={onSave}>Save Changes</button>
+		{/if}
+	</div>
+	<div class="flex EditorViews">
+		<div class="w-3/5">
+			<CodeMirror bind:this={codemirrorInstance} on:change={onCodeEditorChange} />
 		</div>
-		<iframe class="w-full h-full" title="renderer" bind:this={iframeHandle}> </iframe>
+		<div class="Renderer w-2/5">
+			<iframe class="w-full h-full" title="renderer" bind:this={iframeHandle}> </iframe>
+		</div>
 	</div>
 </div>
+
+<style>
+	.EditorViews {
+		height: calc(100% - 48px);
+	}
+</style>
