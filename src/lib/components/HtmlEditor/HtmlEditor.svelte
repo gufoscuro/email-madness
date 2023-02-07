@@ -1,9 +1,12 @@
 <script lang="ts">
 	import CodeMirror from "../CodeMirror/CodeMirror.svelte";
+	import { templateMatcher } from '$lib/utils/templates';
+	import type { TemplateMap } from '$lib/utils/templates';
 
-	export let templateCode: string = '';
+	export let pageCode: string = '';
 	export let layoutCode: string = '';
 	export let isLayoutEditor: boolean = false;
+	export let templates: TemplateMap = {};
 	
 	let iframeHandle: any,
 		timer: any,
@@ -35,17 +38,18 @@
 		const iframedoc = iframeHandle.contentDocument || iframeHandle.contentWindow.document;
 		if (iframedoc) {
 			iframeCode = content;
+			iframeCode = templateMatcher(templates, content);
 			if (content.trim() === '') {
 				iframedoc.documentElement.innerHTML = '<div style="height: 100vh; width: 100%; text-align: center; display: flex; align-items: center;justify-content: center;font-family: sans-serif;"><div>Your content will appear here</div></div>';
 			} else {
-				iframedoc.documentElement.innerHTML = content;
+				iframedoc.documentElement.innerHTML = iframeCode;
 			}
 		}
 	}
 
 	const injectInLayout = (data: string) => {
 		// console.log ('injectInLayout', layoutCode !== '', layoutCode.replace(/{{template}}/g, data))
-		return layoutCode !== '' ? layoutCode.replace(/{{template}}/g, data) : data;
+		return layoutCode !== '' ? layoutCode.replace(/{{main_template}}/g, data) : data;
 	}
 
 	const onSave = async () => {
@@ -82,7 +86,8 @@
 	}
 
 	const getIframeContent = (data: string) => {
-		return isLayoutEditor ? data : injectInLayout(editorCode)
+		const temp = isLayoutEditor ? data : injectInLayout(editorCode);
+		return temp;
 	}
 
 	const onLoad = (data: string) => {
@@ -92,8 +97,8 @@
 		updateIframe(getIframeContent(editorCode));
 	}
 
-	$: if (iframeHandle && templateCode) {
-		onLoad(templateCode);
+	$: if (iframeHandle && pageCode) {
+		onLoad(pageCode);
 	}
 
 	$: if (iframeHandle) updateIframe(getIframeContent(editorCode));

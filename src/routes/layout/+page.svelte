@@ -1,11 +1,12 @@
 <script lang="ts">
 	import HtmlEditor from "$lib/components/HtmlEditor/HtmlEditor.svelte";
+	import type { PageData } from './$types';
 
-	export let data: { layout: string };
+	export let data: PageData;
 </script>
 
 <svelte:head>
 	<title>Layout</title>
 </svelte:head>
 
-<HtmlEditor isLayoutEditor templateCode={data.layout} />
+<HtmlEditor isLayoutEditor pageCode={data.layout} templates={data.templates} />

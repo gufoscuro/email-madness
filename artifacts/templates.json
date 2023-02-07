@@ -1,0 +1,3 @@
+{
+   "view-test-report-button": "<!-- Button Table // -->\n<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n\t<tbody>\n\t\t<tr>\n\t\t\t<td align=\"center\" class=\"ctaButton\" style=\"background-color:#3DDC91; padding: 12px 35px; border-radius: 50px;\">\n\t\t\t\t<!-- Button Link // -->\n\t\t\t\t<a class=\"text\" href=\"*|serverURL|*/project/*|projectId|*/event/*|eventId|*\" target=\"_blank\" style=\"color:#132322; font-family:'Poppins', Helvetica, Arial, sans-serif; font-size:14px; font-weight:600; font-style:normal; line-height:20px; text-decoration:none; display:block\">{{content}}</a>\n\t\t\t</td>\n\t\t</tr>\n\t</tbody>\n</table>"
+}

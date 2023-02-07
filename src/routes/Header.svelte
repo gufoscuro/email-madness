@@ -10,7 +10,7 @@
 	.HeadLink.active {
 		@apply border-b-2;
 		@apply border-solid;
-		@apply border-gray-400;
+		@apply border-blue-400;
 	}
 </style>
 
@@ -19,6 +19,9 @@
 	<div class="h-full flex-grow flex items-center justify-end">
 		<div class="mr-4">
 			<a href="/layout" class="HeadLink" class:active={$page.url.pathname === '/layout'}>General Layout</a>
+		</div>
+		<div class="mr-4">
+			<a href="/templates" class="HeadLink" class:active={$page.url.pathname === '/templates'}>Templates</a>
 		</div>
 		<div>
 			<a href="/" class="HeadLink" class:active={$page.url.pathname === '/'}>Page</a>
