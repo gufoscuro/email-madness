@@ -1,6 +1,8 @@
 <script lang="ts">
 	import CodeMirror from "../CodeMirror/CodeMirror.svelte";
 	import { templateMatcher } from '$lib/utils/templates';
+	import { fly } from 'svelte/transition';
+    import type { FlyParams } from 'svelte/transition';
 	import type { TemplateMap } from '$lib/utils/templates';
 
 	export let pageCode: string = '';
@@ -15,7 +17,13 @@
 		iframeCode: string = '',
 		editorCodeUntouched: string = '',
 		firstLoad: boolean = false,
-		saveBusy: boolean = false;
+		saveBusy: boolean = false,
+		confirmMessage: string | null = null;
+
+	const messageFX: FlyParams = {
+        duration: 300,
+        x: 30
+    }
 
 	const onCodeEditorChange = (event: CustomEvent) => {
 		if (timer) {
@@ -52,6 +60,13 @@
 		return layoutCode !== '' ? layoutCode.replace(/{{main_template}}/g, data) : data;
 	}
 
+	const triggerConfirmMessage = (message: string) => {
+		confirmMessage = message;
+		setTimeout(() => {
+			confirmMessage = null;
+		}, 2000);
+	}
+
 	const onSave = async () => {
 		saveBusy = true;
 		let formData = new FormData();
@@ -66,6 +81,7 @@
 		});
 		editorCodeUntouched = editorCode;
 		saveBusy = false;
+		triggerConfirmMessage('Saved successfully!')
 	}
 
 	const downloadFile = (data: string, filename: string) => {
@@ -83,6 +99,16 @@
 
 	const onExport = () => {
 		downloadFile(iframeCode, 'template.txt')
+	}
+
+	const onCopyToClipboard = () => {
+		const t = document.createElement ('textarea');
+		t.classList.add('invisible');
+		document.body.appendChild (t);
+		t.value = iframeCode;
+		t.select();
+		navigator.clipboard.writeText(t.value);
+		triggerConfirmMessage('Copied into clipboard!')
 	}
 
 	const getIframeContent = (data: string) => {
@@ -112,6 +138,10 @@
 		{/if}
 		{#if !isLayoutEditor}
 			<button class="button primary-button" on:click={onExport}>Export</button>
+			<button class="button primary-button" on:click={onCopyToClipboard}>Copy (clipboard)</button>
+		{/if}
+		{#if confirmMessage}
+			<div class="ml-4 text-green-400 font-semibold" transition:fly={messageFX}>{confirmMessage}</div>
 		{/if}
 	</div>
 	<div class="flex EditorViews">

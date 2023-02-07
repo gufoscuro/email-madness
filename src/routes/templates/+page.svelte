@@ -32,7 +32,7 @@
         disableCurrentlyEditing();
         templatesList = templatesList;
         const result: TemplatesObject = Object.assign({}, ...templatesList.filter(it => it.name.trim() !== '').map (s => ({[s.name]: s.data})));
-        console.log ('saving templates', result)
+        // console.log ('saving templates', result)
 
         saveBusy = true;
 		await fetch('/templates', {
