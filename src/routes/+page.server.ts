@@ -5,7 +5,6 @@ import type { LayoutResponse } from '$lib/services/fileUtil';
  
 /** @type {import('./$types').PageServerLoad} */
 export async function load(): Promise<LayoutResponse> {
-    console.log ('root load')
     const layout = await getFile('layout.txt');
     const page = await getFile('page.txt');
     const templates = await getTemplates();

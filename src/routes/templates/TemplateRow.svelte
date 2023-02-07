@@ -13,7 +13,6 @@
     const dispatch = createEventDispatcher();
 
     const onCodeEditorChange = (event: CustomEvent) => {
-        // console.log ('onCodeEditorChange', event.detail);
         codemirrorValue = event.detail.value;
         dispatchChange();
     }
