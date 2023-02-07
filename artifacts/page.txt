@@ -1,11 +1,5 @@
-<tr>
-   <td align="center" valign="top" style="padding-left: 20px; padding-right: 20px; padding-top: 20px;" class="mainTitle">
-      <!-- Main Title Text // -->
-      <h2 class="text" style="color:#000000; font-family:'Poppins', Helvetica, Arial, sans-serif; font-size:28px; font-weight:600; font-style:normal; letter-spacing:normal; line-height:36px; text-transform:none; text-align:center; padding:0; margin:0" mc:edit="mainTitle">
-         API Testing - Error Alert: Resolved
-      </h2>
-   </td>
-</tr>
+{{!template name(main-title-centered) content(API Testing - Error Alert: Resolved)!}}
+
 <tr>
    <td align="center" valign="top" style="padding-bottom: 10px; padding-left: 20px; padding-right: 20px;" class="subTitle">
       <!-- Sub Title Text // -->
@@ -192,7 +186,7 @@
             <tr>
                <td align="center" valign="top" style="padding-top:20px;padding-bottom:20px;">
                		
-				   {{!template name(view-test-report-button) content(Hello there)!}}
+				   {{!template name(view-test-report-button) content(View test report)!}}
                
 				</td>
             </tr>
