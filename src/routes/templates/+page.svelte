@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { fly } from 'svelte/transition';
+    import type { FlyParams } from 'svelte/transition';
     import TemplateRow from "./TemplateRow.svelte";
 
     type TemplatesObject = {
@@ -18,33 +20,19 @@
     let templates: TemplatesObject = {},
         templatesList: Array<TemplateInternalObject>,
         saveBusy: boolean = false,
+        savedMessage: boolean = false,
         currentlyEditing: TemplateInternalObject;
-        
-    // const templates: {[key: string]: string} = {
-    //     wrapper: '<div class="wrapper p-4 bg-gray-600">this is the wrapper{{content}}</div>',
-    //     nested: '<button>{{content}}</button>',
-    //     inner: '<div class="p-2 bg-red-200">INNER</div><div>{{content}}</div>'
-    // }
-    // const templateString = `{{em:template name:wrapper}}
-    //         <div class="whatever">
-    //             <tr>
-    //                 <td><p>Something</p></td>
-    //             </tr>
-    //             {{em:template name:inner}}
-    //                 inner
-    //                 {{em:template name:nested}}My Button{{/em:template}}
-    //             {{/em:template}}
-    //         something
-    //         </div>
-    //     {{/em:template}}`;
-
     
+    const savedMessageFX: FlyParams = {
+        duration: 300,
+        x: 30
+    }
 
     const onSave = async () => {
         disableCurrentlyEditing();
         templatesList = templatesList;
         const result: TemplatesObject = Object.assign({}, ...templatesList.filter(it => it.name.trim() !== '').map (s => ({[s.name]: s.data})));
-        // console.log ('result', result);
+        console.log ('saving templates', result)
 
         saveBusy = true;
 		await fetch('/templates', {
@@ -55,8 +43,10 @@
 			},
 			body: JSON.stringify(result)
 		});
-
 		saveBusy = false;
+        savedMessage = true;
+        loadData({ templates: result });
+        setTimeout(() => (savedMessage = false), 1200);
     }
 
     const disableCurrentlyEditing = () => {
@@ -100,8 +90,8 @@
 
     const onChange = (element: TemplateInternalObject, nextValues: Partial<TemplateInternalObject>) => {
         // console.log ('onChange', nextValues)
-        element.name = nextValues.name;
-        element.data = nextValues.data;
+        element.name = nextValues.name as string;
+        element.data = nextValues.data as string;
     }
 
     const updateTemplatesList = (names?: Array<string>) => {
@@ -119,7 +109,10 @@
 
 <div class="flex items-center justify-start px-4 h-12">
     <button class="button primary-button" on:click={onAdd}>Add Template</button>
-    <button class="button secondary-button" on:click={onSave}>Save Changes</button>
+    <button class="button secondary-button" on:click={onSave} disabled={saveBusy}>Save Changes</button>
+    {#if savedMessage}
+        <div class="ml-4 text-green-400 font-semibold" transition:fly={savedMessageFX}>Saved Successfully!</div>
+    {/if}
 </div>
 <div class="p-2">
     {#each templatesList as template}

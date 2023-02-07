@@ -7,7 +7,8 @@
     export let editing: boolean = false;
 
     let codemirrorInstance: any,
-        codemirrorValue = data;
+        nameField: any,
+        codemirrorValue: string = data;
 
     const dispatch = createEventDispatcher();
 
@@ -26,6 +27,10 @@
 
     const loadData = (nextData: string) => {
         codemirrorInstance.update(nextData);
+    }
+
+    $: if (nameField) {
+        nameField.focus()
     }
     
     $: if (codemirrorInstance) {
@@ -52,7 +57,7 @@
     class:bg-slate-600={editing} class:py-4={editing}>
     <div class="py-1 pl-3 Name">
         {#if editing}
-            <input type="text" bind:value={name} />
+            <input type="text" bind:this={nameField} bind:value={name} />
         {:else}
             <div class="font-semibold">{name}</div>
         {/if}
