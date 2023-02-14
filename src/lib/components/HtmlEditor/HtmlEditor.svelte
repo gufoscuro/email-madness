@@ -8,6 +8,7 @@
 	export let pageCode: string = '';
 	export let layoutCode: string = '';
 	export let isLayoutEditor: boolean = false;
+	export let file: string = '';
 	export let templates: TemplateMap = {};
 	
 	let iframeHandle: any,
@@ -97,8 +98,19 @@
 		}, 0)
 	}
 
-	const onExport = () => {
-		downloadFile(iframeCode, 'template.txt')
+	const onExport = async () => {
+		// downloadFile(iframeCode, 'template.txt')
+		let formData = new FormData();
+		formData.append('data', iframeCode);
+		await fetch('?/export', {
+			method: 'POST',
+			headers: {
+				// 'Accept': 'application/json',
+				// 'Content-Type': 'application/json'
+			},
+			body: formData
+		});
+		triggerConfirmMessage('Exported successfully in /email-templates/export/' + file);
 	}
 
 	const onCopyToClipboard = () => {

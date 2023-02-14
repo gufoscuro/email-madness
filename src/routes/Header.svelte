@@ -24,7 +24,7 @@
 			<a href="/templates" class="HeadLink" class:active={$page.url.pathname === '/templates'}>Templates</a>
 		</div>
 		<div>
-			<a href="/" class="HeadLink" class:active={$page.url.pathname === '/'}>Page</a>
+			<a href="/" class="HeadLink" class:active={$page.url.pathname === '/' || $page.url.pathname.includes('/email/')}>Pages</a>
 		</div>
 	</div>
 </div>

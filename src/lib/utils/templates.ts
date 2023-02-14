@@ -10,8 +10,9 @@ export function templateMatcher (templates: TemplateMap, content: string): strin
     return content.replace(/{{!?template name\(([a-zA-Z\-]+)\)( content\([a-zA-Z0-9!@#\$%\^\&*\-\s:,;\.]+\))?!?}}/g, function($0, $1, $2) {
         const matches = $2 ? $2.match(/content\(([a-zA-Z0-9!@#\$%\^\&*\-\s:,;\.]+)\)/) : null;
         const templateContent = matches ? matches[1] : '';
-        // console.log ('templateMatcher', $1, $2, templateContent)
-        return templateReplacer(templates, $1, templateContent)
+        const commented = $0 ? $0.startsWith('{{!template') : false;
+        // console.log ('templateMatcher', $0 ? $0 : 'seghe');
+        return commented ? '' : templateReplacer(templates, $1, templateContent)
         // return templateReplacer(templates, $1, templateMatcher(templates, $2))
     });
 }

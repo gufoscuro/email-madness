@@ -14,8 +14,9 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
       <title>API Fortress - Error Alert</title>
       <!-- Google Fonts Link -->
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
-      <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet"/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
       <style type="text/css">
          /*------ Client-Specific Style ------ */
          @-ms-viewport{width:device-width;}
@@ -29,15 +30,14 @@
          /*------ Reset Style ------ */
          *{-webkit-text-size-adjust:none;-webkit-text-resize:100%;text-resize:100%;}
          table{border-spacing: 0 !important;}
-         h1, h2, h3, h4, h5, h6, p{display:block; Margin:0; padding:0;}
+         h1, h2, h3, h4, h5, h6, p{display:block; Margin:0; padding:0; color:#1E2127}
          img, a img{border:0; height:auto; outline:none; text-decoration:none;}
          #bodyTable, #bodyCell{ margin:0; padding:0; width:100%;}
          body {height:100%; margin:0; padding:0; width:100%;}
          .appleLinks a {color: #c2c2c2 !important; text-decoration: none;}
          span.preheader { display: none !important; }
          /*------ Google Font Style ------ */
-         [style*="Open Sans"] {font-family:'Open Sans', Helvetica, Arial, sans-serif !important;}
-         [style*="Lora"] {font-family:'Lora', Georgia, Times, serif !important;}
+         [style*="DM Sans"] {font-family:'DM Sans', Helvetica, Arial, sans-serif !important;}
          /*------ General Style ------ */
          .wrapperWebview, .wrapperBody, .wrapperFooter{width:100%; max-width:600px; Margin:0 auto;}
          /*------ Column Layout Style ------ */
@@ -61,7 +61,7 @@
          <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed; background-color: #D8F8E9; padding-top:40px;" id="bodyTable">
             <tbody>
                <tr>
-                  <td align="center" valign="top" style="padding-right:10px;padding-left:10px;" id="bodyCell">
+                  <td align="center" valign="top" style="padding-right:10px; padding-left:10px;" id="bodyCell">
                      <!--[if (gte mso 9)|(IE)]>
                      <table align="center" border="0" cellspacing="0" cellpadding="0" style="width:600px;" width="600">
                         <tr>
@@ -94,14 +94,14 @@
                                           <table border="0" cellpadding="0" cellspacing="0" style="background-color:#FFFFFF;" width="100%" class="tableCard">
                                              <tbody>
                                                 <tr>
-                                                   <!-- Header Top Border // -->
-                                                   <td height="3" style="background-color:#3DDC91;font-size:1px;line-height:3px;" class="topBorder"> </td>
+                                                   	{{!template name(card-border-top-error)}}
+													{{!template name(card-border-top-success)}}
                                                 </tr>
                                                 <tr>
                                                    <td align="center" valign="middle" style="padding-top: 40px; padding-bottom: 30px;" class="emailLogo">
                                                       <!-- Logo and Link // -->
                                                       <a href="https://www.saucelabs.com/">
-                                                      <img src="https://info.saucelabs.com/rs/saucelabsinc/images/logo-saucelabs-rg.png" width="250" alt="Sauce Labs" border="0" style="display: block;"/>
+                                                      <img src="https://info.saucelabs.com/rs/468-XBT-687/images/sauce-api-dark.png" width="250" alt="Sauce Labs" border="0" style="display: block;"/>
                                                       </a>
                                                    </td>
                                                    <td align="right" valign="middle" style="padding-top: 40px; padding-bottom: 40px;" class="emailLogo">
@@ -109,9 +109,10 @@
                                                 </tr>
                                                 
 												 
-												{{main_template}} 
+												{{main_template}}
 												 
-												
+												 
+												 
                                                 <tr>
                                                    <td height="20" style="font-size:1px;line-height:1px;"> </td>
                                                 </tr>
@@ -121,32 +122,44 @@
                                              </tbody>
                                           </table>
                                           <!-- Table Card Close// -->
-                                          <!-- HELP BANNER -->
-                                    <tr>
-                                       <td align="center" valign="top" style="padding-bottom: 0px; padding-left: 40px; padding-right: 20px; padding-top: 20px; background-color: #F9F9F9;">
-                                          <h2 class="text" style="color:#000000; font-family:'Poppins', Helvetica, Arial, sans-serif; font-size:20px; font-weight:700; font-style:normal; letter-spacing:normal; line-height:30px; text-transform:none; text-align:center; padding:0; margin:0" mc:edit="mainTitle">Need Help?</h2>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td align="center" valign="top" style="padding-bottom: 0px; padding-left: 40px; padding-right: 20px; padding-top: 0px; background-color: #F9F9F9;">
-                                          <h2 class="text" style="color:#000000; font-family:'Poppins', Helvetica, Arial, sans-serif; font-size:16px; font-weight:500; font-style:normal; letter-spacing:normal; line-height:30px; text-transform:none; text-align:center; padding:0; margin:0" mc:edit="mainTitle">Contact our support team with any questions you have.</h2>
-                                       </td>
-                                    </tr>
-                                    <tr>
-                                       <td align="center" valign="top" style="padding-bottom: 20px; padding-left: 40px; padding-right: 20px; padding-top: 0px; background-color: #F9F9F9;">
-                                          <a href="mailto:support@saucelabs.com">
-                                             <h2 class="text" style="color:#0E75DD; font-family:'Poppins', Helvetica, Arial, sans-serif; font-size:16px; font-weight:500; font-style:normal; letter-spacing:normal; line-height:30px; text-transform:none; text-align:center; padding:0; margin:0; text-decoration:underline; " mc:edit="mainTitle">support@saucelabs.com</h2>
-                                          </a>
-                                       </td>
-                                    </tr>
-                                    <!-- HELP BANNER CLOSE-->
+										  
+										 {{!template name(help-pre-footer)}}
+                                          
                                     </td>
-                                    </tr>
+                                    </tr>			
                                  </tbody>
                               </table>
                               <!-- Email Wrapper Body Close // --> 
                               <!-- Email Wrapper Footer Open // -->
-                              <!-- Email Wrapper Footer Close // -->
+                              <!-- Email Wrapper Footer Close // -->  
+                              <table cellpadding="0" cellspacing="0" style="max-width:600px; border-collapse: collapse;">
+								 {{template name(footer-additional-links)}}
+                                 <tr>
+                                    <td valign="middle" align="center" style="padding-top:20px;">
+                                       <a href="https://www.facebook.com/saucelabs"><img
+                                          src="https://info.saucelabs.com/rs/468-XBT-687/images/facebook.png" height="30px" width="30"
+                                          border="0"/></a>&nbsp;
+                                       <a href="https://www.linkedin.com/company/sauce-labs/"><img
+                                          src="https://info.saucelabs.com/rs/468-XBT-687/images/Linkedin.png" height="30px" width="30" border="0"/></a>&nbsp;
+                                       <a href="http://www.twitter.com/saucelabs/"><img
+                                          src="https://info.saucelabs.com/rs/468-XBT-687/images/twitter.png" height="30px" width="30"
+                                          border="0"/></a>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td align="center">
+                                       <h5 style="color:#1E2127; font-family:'DM Sans', Arial, sans-serif;font-size:16px; margin-top: 16px; margin-bottom: 8px;">
+                                          Sauce Labs
+                                       </h5>
+                                       <p style="color:#1E2127; font-family:'DM Sans', Arial, sans-serif;font-size: 13px; font-weight: 300; margin-top: 16px; margin-bottom: 16px;">
+                                          450 Sansome Street, 9th Floor, San Francisco, CA 94111
+                                       </p>
+                                       <p style="color:#1E2127; font-family:'DM Sans', Arial, sans-serif;font-size: 13px; font-weight: 300; margin-top: 16px; margin-bottom: 16px;">
+                                          Copyright &copy; 2023 Sauce Labs. All rights reserved.
+                                       </p>
+                                    </td>
+                                 </tr>
+                              </table>
                               <!--[if (gte mso 9)|(IE)]>
                            </td>
                         </tr>

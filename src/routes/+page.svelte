@@ -1,5 +1,4 @@
 <script lang="ts">
-	import HtmlEditor from "$lib/components/HtmlEditor/HtmlEditor.svelte";
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -9,4 +8,9 @@
 	<title>Home</title>
 </svelte:head>
 
-<HtmlEditor pageCode={data.page} layoutCode={data.layout} templates={data.templates} />
+<div class="font-bold text-lg p-4 underline">Available Templates:</div>
+{#each data.files as file}
+	<a href={'/email/' + file} class="block px-4 py-2 hover:bg-gray-600">
+		{file}
+	</a>
+{/each}
