@@ -148,13 +148,13 @@
                                  </tr>
                                  <tr>
                                     <td align="center">
-                                       <h5 style="color:#1E2127; font-family:'DM Sans', Arial, sans-serif;font-size:16px; margin-top: 16px; margin-bottom: 8px;">
+                                       <h5 style="color:#1E2127; font-family:'DM Sans', Arial, sans-serif;font-size:16px; margin-top: 16px; margin-bottom: 4px;">
                                           Sauce Labs
                                        </h5>
-                                       <p style="color:#1E2127; font-family:'DM Sans', Arial, sans-serif;font-size: 13px; font-weight: 300; margin-top: 16px; margin-bottom: 16px;">
+                                       <p style="color:#1E2127; font-family:'DM Sans', Arial, sans-serif;font-size: 13px; font-weight: 300; margin-top: 0px; margin-bottom: 16px;">
                                           450 Sansome Street, 9th Floor, San Francisco, CA 94111
                                        </p>
-                                       <p style="color:#1E2127; font-family:'DM Sans', Arial, sans-serif;font-size: 13px; font-weight: 300; margin-top: 16px; margin-bottom: 16px;">
+                                       <p style="color:#1E2127; font-family:'DM Sans', Arial, sans-serif;font-size: 13px; font-weight: 300; margin-top: 20px; margin-bottom: 16px;">
                                           Copyright &copy; 2023 Sauce Labs. All rights reserved.
                                        </p>
                                     </td>
